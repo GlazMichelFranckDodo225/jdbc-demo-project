@@ -19,7 +19,8 @@ public class JdbcDemo {
         String url = "jdbc:mysql://localhost:3306/db_jdbc_demo_project";
         String username = "root";
         String password = "*ruTuch7D7ub";
-        String sqlQuery = "SELECT sname FROM student WHERE sid = 1";
+        // String sqlQuery = "SELECT sname FROM student WHERE sid = 1";
+        String sqlQuery = "SELECT * FROM student";
 
         // Load and Register - Statement Below is Now Optional
         // Loading class `com.mysql.jdbc.Driver'==> This is deprecated.
@@ -35,11 +36,29 @@ public class JdbcDemo {
         Statement statement = connection.createStatement();
         // Execute Statement (Fetch Data - ResultSet)
         ResultSet resultSet = statement.executeQuery(sqlQuery);
-        // Process the Result (Print the Result)
+
+        // FETCH ONE ROW
+        /*// Process the Result (Print the Result)
         // System.out.println(resultSet.next()); // Returns true or false
         resultSet.next(); // Put the Pointer at the Start of the Result Set
         String studentName = resultSet.getString("sname");
-        System.out.println("The Name of the Student is : " + studentName);
+        System.out.println("The Name of the Student is : " + studentName);*/
+
+        // FETCH ALL ROWS
+        ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+        // System.out.println(resultSetMetaData);
+        int columnsNumber = resultSetMetaData.getColumnCount();
+        // System.out.println(columnsNumber);
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1) System.out.print(",  ");
+
+                String columnValue = resultSet.getString(i);
+                System.out.print(resultSetMetaData.getColumnName(i) + " : " + columnValue);
+            }
+            System.out.println("");
+        }
+
         // Close Connection
         connection.close();
         System.out.println("Connection Closed");
