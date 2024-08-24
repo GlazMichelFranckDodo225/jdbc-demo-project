@@ -20,7 +20,11 @@ public class JdbcDemo {
         String username = "root";
         String password = "*ruTuch7D7ub";
         // String sqlQuery = "SELECT sname FROM student WHERE sid = 1";
-        String sqlQuery = "SELECT * FROM student";
+        // String sqlQuery = "SELECT * FROM student";
+        // String sqlQuery = "UPDATE student SET sname = 'Tony Parker' WHERE sid = 1";
+        // String sqlQuery = "DELETE FROM student WHERE sid = 1";
+        String sqlQuery =
+                "INSERT INTO student VALUES(7, 'Michael Phelps', 'michaelphelps@gmail.com', '012547838', '123456789')";
 
         // Load and Register - Statement Below is Now Optional
         // Loading class `com.mysql.jdbc.Driver'==> This is deprecated.
@@ -34,17 +38,20 @@ public class JdbcDemo {
         System.out.println("Connection Established");
         // Create Statement
         Statement statement = connection.createStatement();
-        // Execute Statement (Fetch Data - ResultSet)
-        ResultSet resultSet = statement.executeQuery(sqlQuery);
 
-        // FETCH ONE ROW
+        // ====================
+
+        // Execute Statement (Fetch Data - ResultSet)
+        // ResultSet resultSet = statement.executeQuery(sqlQuery);
+
+        // READ (FETCH ONE ROW)
         /*// Process the Result (Print the Result)
         // System.out.println(resultSet.next()); // Returns true or false
         resultSet.next(); // Put the Pointer at the Start of the Result Set
         String studentName = resultSet.getString("sname");
         System.out.println("The Name of the Student is : " + studentName);*/
 
-        // FETCH ALL ROWS
+        /*// READ (FETCH ALL ROWS)
         ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
         // System.out.println(resultSetMetaData);
         int columnsNumber = resultSetMetaData.getColumnCount();
@@ -57,7 +64,16 @@ public class JdbcDemo {
                 System.out.print(resultSetMetaData.getColumnName(i) + " : " + columnValue);
             }
             System.out.println("");
-        }
+        }*/
+
+        // UPDATE
+        // statement.execute(sqlQuery);
+
+        // CREATE
+        statement.executeUpdate(sqlQuery);
+
+        // DELETE
+        // statement.execute(sqlQuery);
 
         // Close Connection
         connection.close();
