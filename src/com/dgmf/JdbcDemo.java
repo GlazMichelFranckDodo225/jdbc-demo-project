@@ -23,8 +23,19 @@ public class JdbcDemo {
         // String sqlQuery = "SELECT * FROM student";
         // String sqlQuery = "UPDATE student SET sname = 'Tony Parker' WHERE sid = 1";
         // String sqlQuery = "DELETE FROM student WHERE sid = 1";
+        /*String sqlQuery =
+                "INSERT INTO student VALUES(7, 'Michael Phelps', 'michaelphelps@gmail.com', '012547838', '123456789')";*/
+        // Dynamic Insert Query
+        int sid = 8;
+        String sname = "Millord";
+        String semail = "millord@gmail.com";
+        String sphone = "012547839";
+        String spwd = "223456789";
+
         String sqlQuery =
-                "INSERT INTO student VALUES(7, 'Michael Phelps', 'michaelphelps@gmail.com', '012547838', '123456789')";
+                "INSERT INTO student VALUES(" + sid + ", '" + sname + "', '" + semail + "', '" + sphone + "', '" + spwd + "')";
+
+
 
         // Load and Register - Statement Below is Now Optional
         // Loading class `com.mysql.jdbc.Driver'==> This is deprecated.
