@@ -26,14 +26,20 @@ public class JdbcDemo {
         /*String sqlQuery =
                 "INSERT INTO student VALUES(7, 'Michael Phelps', 'michaelphelps@gmail.com', '012547838', '123456789')";*/
         // Dynamic Insert Query
-        int sid = 8;
+        /*int sid = 8;
         String sname = "Millord";
         String semail = "millord@gmail.com";
         String sphone = "012547839";
-        String spwd = "223456789";
+        String spwd = "223456789";*/
+        int sid = 9;
+        String sname = "Big Ben";
+        String semail = "bigben@gmail.com";
+        String sphone = "012547840";
+        String spwd = "223456790";
 
-        String sqlQuery =
-                "INSERT INTO student VALUES(" + sid + ", '" + sname + "', '" + semail + "', '" + sphone + "', '" + spwd + "')";
+        /*String sqlQuery =
+                "INSERT INTO student VALUES(" + sid + ", '" + sname + "', '" + semail + "', '" + sphone + "', '" + spwd + "')";*/
+        String sqlQuery = "INSERT INTO student VALUES(?, ?, ?, ?, ?)";
 
 
 
@@ -48,7 +54,13 @@ public class JdbcDemo {
         Connection connection = DriverManager.getConnection(url, username, password);
         System.out.println("Connection Established");
         // Create Statement
-        Statement statement = connection.createStatement();
+        // Statement statement = connection.createStatement();
+        PreparedStatement statement = connection.prepareStatement(sqlQuery);
+        statement.setInt(1, sid);
+        statement.setString(2, sname);
+        statement.setString(3, semail);
+        statement.setString(4, sphone);
+        statement.setString(5, spwd);
 
         // ====================
 
@@ -81,7 +93,8 @@ public class JdbcDemo {
         // statement.execute(sqlQuery);
 
         // CREATE
-        statement.executeUpdate(sqlQuery);
+        // statement.executeUpdate(sqlQuery);
+        statement.execute();
 
         // DELETE
         // statement.execute(sqlQuery);
